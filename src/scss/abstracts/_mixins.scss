@@ -1,0 +1,10 @@
+@mixin flex($a: center, $j: center) {
+	display: flex;
+	justify-content: $j;
+	align-items: $a;
+}
+@mixin mobile {
+	@media (max-width: 576px) {
+		@content;
+	}
+}

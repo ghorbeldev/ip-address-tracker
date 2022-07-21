@@ -1,0 +1,52 @@
+@use '../../scss/abstracts/' as *;
+.wrapper {
+	background-image: url(../../assets/images/pattern-bg.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+	@include flex(flex-start);
+	padding: 1.5rem 1rem 6.5rem 1rem;
+	position: relative;
+	flex-wrap: wrap;
+	@include mobile {
+		padding: 1rem 1rem 10rem 1rem;
+	}
+	h1 {
+		color: white;
+		width: 100%;
+		margin-bottom: 1rem;
+		text-align: center;
+		font-weight: 500;
+	}
+	.search {
+		@include flex(stretch, center);
+		input {
+			height: 2rem;
+			padding: 1.2rem;
+			width: 350px;
+			font-size: 1rem;
+			font-weight: 500;
+			@include mobile {
+				width: 300px;
+			}
+			@media (max-width: 375px) {
+				width: 265px;
+			}
+			border-radius: 0.75rem 0 0 0.75rem;
+			::placeholder {
+				color: $dark-gray-500;
+				opacity: 0.8;
+			}
+		}
+		.arrow {
+			// --width: 2.5rem;
+			padding: 0 1rem;
+			@include flex;
+			background-color: $dark-gray-700;
+			// height: var(--width);
+			// width: var(--width);
+			border-radius: 0 0.75rem 0.75rem 0;
+			cursor: pointer;
+		}
+	}
+}

@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { useState } from 'react';
+import MapLocation from './components/map-location/MapLocation';
+import Search from './components/search/Search';
+import { getIPInformation } from './config/api';
+import './scss/_globals.scss';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [value, setValue] = useState('');
+	const [data, setData] = useState([]);
+	const handleChange = e => setValue(e.target.value);
+	const handleClick = async () => {
+		try {
+			const response = await getIPInformation(value);
+			setData(response.data);
+			console.log(response.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	return (
+		<div className='App'>
+			<Search
+				value={value}
+				handleChange={handleChange}
+				handleClick={handleClick}
+				data={data}
+			/>
+
+			{data.length !== 0 ? (
+				<MapLocation
+					position={[data.location.lat, data.location.lng]}
+					name={data.isp}
+				/>
+			) : (
+				<div className='map-wrapper'>
+					Please Enter any IP address or domain in the Search field
+				</div>
+			)}
+		</div>
+	);
 }
 
 export default App;

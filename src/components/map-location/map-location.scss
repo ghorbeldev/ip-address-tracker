@@ -1,0 +1,11 @@
+@use '../../scss//abstracts/' as *;
+
+.map-wrapper {
+	flex: 1;
+	@include flex;
+	overflow: hidden;
+	> .leaflet-container {
+		width: 100%;
+		height: 100%;
+	}
+}

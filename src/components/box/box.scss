@@ -1,0 +1,63 @@
+@use '../../scss/abstracts/' as *;
+
+.box-wrapper {
+	background-color: white;
+	position: absolute;
+	left: 50%;
+	top: 100%;
+	transform: translate(-50%, -50%);
+	border-radius: 0.75rem;
+	@include flex(stretch);
+	width: fit-content;
+	z-index: 9999;
+	max-width: 100%;
+	@include mobile {
+		flex-direction: column;
+		width: 300px;
+		align-items: auto;
+		top: 100%;
+		padding: 1rem 0;
+	}
+	> div {
+		flex-basis: 25%;
+		position: relative;
+		padding: 1.88rem 1.64rem;
+		@include flex(flex-start, flex-start);
+		flex-direction: column;
+
+		@media (max-width: 700px) {
+			padding: 1.44rem 0.8rem;
+		}
+		&:not(:last-child) {
+			::after {
+				content: '';
+				position: absolute;
+				width: 0.5px;
+				height: 50%;
+				background-color: $dark-gray-500;
+				right: 0;
+				top: 25%;
+			}
+		}
+		@include mobile {
+			align-items: center;
+			padding: 0.4rem 0.4rem;
+			justify-content: center;
+			&::after {
+				display: none;
+			}
+		}
+		h6 {
+			font-size: 0.8rem;
+			font-weight: 500;
+			white-space: nowrap;
+			color: $dark-gray-500;
+		}
+		h3 {
+			margin-top: 0.5rem;
+			color: $dark-gray-700;
+			font-weight: 500;
+			font-size: 1.2rem;
+		}
+	}
+}
