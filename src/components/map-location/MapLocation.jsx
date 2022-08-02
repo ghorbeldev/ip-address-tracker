@@ -1,10 +1,18 @@
 import React, { useEffect } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import './map-location.scss';
 import 'leaflet/dist/leaflet.css';
 // import L from 'leaflet';
+function ChangeMapView({ coords }) {
+	const map = useMap();
+	map.setView(coords, map.getZoom());
 
+	return null;
+}
 const MapLocation = ({ position, name }) => {
+	// const map = useMap();
+	// map.setView(position, map.getZoom());
+	console.log(position);
 	useEffect(() => {
 		const L = require('leaflet');
 
@@ -23,6 +31,7 @@ const MapLocation = ({ position, name }) => {
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 					url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 				/>
+				<ChangeMapView coords={position} />
 				<Marker position={position}>
 					<Popup>{name}</Popup>
 				</Marker>

@@ -1,9 +1,23 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import MapLocation from './components/map-location/MapLocation';
 import Search from './components/search/Search';
 import { getIPInformation } from './config/api';
 import './scss/_globals.scss';
 function App() {
+	useEffect(() => {
+		const getIPData = async () => {
+			try {
+				const ip = await axios.get('https://api.ipify.org');
+				const response = await getIPInformation(ip.data);
+				console.log(response);
+				setData(response.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getIPData();
+	}, []);
 	const [value, setValue] = useState('');
 	const [data, setData] = useState([]);
 	const handleChange = e => setValue(e.target.value);
